@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<body>
+	<!--<h5>apexcharts</h5>-->
+	<div class="wrapper wrapper-dashboard">
+		{% include "header.html" %}
+		{% include "sidebar.html" %}
+		<section class="main">
+			<div class="container-fluid m-0">
+				<div class="row crow">
+					<div class="col-4">
+						<!-- <div class="card mb-3 mr-3 d-flex align-items-center"
+							style="max-width: 500px; border: 1px solid #343a40;"> -->
+						<div class="card mb-3 mr-3 d-flex align-items-center shadow bg-white-rounded">
+							<div class="row w-100 mb-4 justify-content-center">
+								<div class="col h-100 d-flex align-items-center justify-content-center">
+									<ul class="nav nav-pills" id="pills-tab" role="tablist">
+										<li class="nav-item me-2" role="presentation">
+											<button class="nav-link active small" id="pills-home-tab"
+												data-bs-toggle="pill" data-bs-target="#pills-home" type="button"
+												role="tab" aria-controls="pills-home"
+												aria-selected="true">Questions</button>
+										</li>
+										<li class="nav-item" role="presentation">
+											<button class="nav-link small" id="pills-profile-tab" data-bs-toggle="pill"
+												data-bs-target="#pills-profile" type="button" role="tab"
+												aria-controls="pills-profile" aria-selected="false">Question
+												Papers</button>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="row w-100 h-100 justify-content-center">
+								<div class="col-12 w-100 h-100 d-flex align-items-center">
+									<div class="tab-content h-100 w-100" id="pills-tabContent">
+										<div class="tab-pane fade show active w-100 h-100" id="pills-home"
+											role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+											<div class="row w-100">
+												<div class="col-6 text-center">
+													<div class="title">
+														<h4>Active</h4>
+													</div>
+												</div>
+												<div class="col-6 text-center">
+													<div class="title">
+														<h4>Inactive</h4>
+													</div>
+												</div>
+											</div>
+											<div class="row w-100">
+												<div class="col-6">
+													<h2 class="text-center">{{metrics.active_questions}}</h2>
+												</div>
+												<div class="col-6">
+													<h2 class="text-center">{{metrics.inactive_questions}}</h2>
+												</div>
+											</div>
+											<div class="row pb-3 w-100 h-75 align-items-end">
+												<div class="col-9">
+													<h2 class="text-justify">Total Questions</h2>
+												</div>
+												<div class="col-3">
+														<h1 class="text-end">{{metrics.total_questions}}</h1>
+												</div>
+											</div>
+										</div>
+										<div class="tab-pane fade" id="pills-profile" role="tabpanel"
+											aria-labelledby="pills-profile-tab" tabindex="0">
+											<div class="row w-100">
+												<div class="col-6 text-center">
+													<div class="title">
+														<h4>Active</h4>
+													</div>
+												</div>
+												<div class="col-6 text-center">
+													<div class="title">
+														<h4>Inactive</h4>
+													</div>
+												</div>
+											</div>
+											<div class="row w-100">
+												<div class="col-6">
+													<h2 class="text-center">{{metrics.active_qpapers}}</h2>
+												</div>
+												<div class="col-6">
+													<h2 class="text-center">{{metrics.inactive_qpapers}}</h2>
+												</div>
+											</div>
+											<div class="row pb-3 w-100 h-75 align-items-end">
+												<div class="col-9">
+													<h2 class="text-justify">Total Question Papers</h2>
+												</div>
+												<div class="col-3">
+														<h1 class="text-end">{{metrics.total_qpapers}}</h1>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- <div class="row">
+								<div class="col-md-7">
+									<h2 class="text-justify">Total Questions</h2>
+								</div>
+								<div class="col-md-5">
+									<div class="card-body">
+										<h1 class="text-end">{{metrics.total_questions}}</h1>
+									</div>
+								</div>
+							</div> -->
+						</div>
+					</div>
+					<div class="col-8">
+						<div class="card shadow bg-white-rounded d-flex align-items-center" id="sunburst_chart">
+
+						</div>
+					</div>
+				</div>
+				<div class="row crow">
+					<div class="col-5">
+						<div class="card d-flex align-items-center shadow bg-white-rounded" id="lineChart">
+						</div>
+					</div>
+					<div class="col-7">
+						<div class="card d-flex align-items-center shadow bg-white-rounded" id="barChart">
+						</div>
+					</div>
+				</div>
+			</div>
+	</div>
+
+	</section>
+	</div>
+	<script>
+		var lc_data = JSON.parse('{{lc_data|escapejs}}');
+		var bc_data = JSON.parse('{{bc_data|escapejs}}');
+		var pie_data = {
+			'questions': [
+				{ label: 'Active', value: '{{metrics.active_questions}}' },
+				{ label: 'Inactive', value: '{{metrics.inactive_questions}}' }],
+			'qpapers': [
+				{ label: 'Active', value: '{{metrics.active_qpapers}}' },
+				{ label: 'Inactive', value: '{{metrics.inactive_qpapers}}' }],
+		};
+		var sunburst_data = JSON.parse('{{sunburst_data|safe}}');
+		console.log(sunburst_data);
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"
+		integrity="sha512-vc58qvvBdrDR4etbxMdlTt4GBQk1qjvyORR2nrsPsFPyrs+/u5c3+1Ct6upOgdZoIl7eq6k3a1UPDSNAQi/32A=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script src="{% static "js/bootstrap.bundle.min.js" %}"></script>
+	<script src="{% static "js/custom.js" %}"></script>
+	<script src="{% static "js/dashboard.js" %}"></script>
+	<script src="{% static "js/lineChart.js" %}"></script>
+	<script src="{% static "js/barChart.js" %}"></script>
+	<script src="{% static "js/sunburst.js" %}"></script>
+</body>
+{% endblock %}
+
+</html>

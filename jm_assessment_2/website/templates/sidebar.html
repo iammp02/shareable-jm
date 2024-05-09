@@ -1,0 +1,50 @@
+{% load static %}
+
+<div class="left-pannel-sidebar content " id="content-3" data-mcs-theme="minimal-dark">
+    <ul class="left-sidemenu" id="menu">
+        <li>
+            <a href="{% url "dashboard" %}">
+                <i class="fa fa-dashboard"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+        <li>
+            <a href="#submenu1" data-bs-toggle="collapse" class="nvlink">
+                <i class="icon-project1"></i>
+                <span>Question</span>
+            </a>
+            <ul class="collapse" id="submenu1" data-bs-parent="#menu">
+                <li class="w-100">
+                    <a href="{% url "add_questions" %}" class="nav-link px-0">
+                        <span class="">Add Question</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url "view_questions" %}" class="nav-link px-0">
+                        <span class="">View Question</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#submenu2" data-bs-toggle="collapse" class="nvlink">
+                <i class="icon-project1"></i>
+                <span>Question Paper</span>
+            </a>
+            <ul class="collapse" id="submenu2" data-bs-parent="#menu">
+                <li class="w-100">
+                    <a href="{% url "add_qpaper" %}" class="nav-link ">
+                        <span>Add Question Paper</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url "view_qpaper" %}" class="nav-link ">
+                        <span>View Question Paper</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+    </ul>
+</div>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>

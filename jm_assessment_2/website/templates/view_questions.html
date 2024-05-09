@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<body>
+    <div class="wrapper wrapper-dashboard">
+        {% include "header.html" %}
+        {% include "sidebar.html" %}
+        <section class="main">
+            <div class="container-xl">
+                <div class="row mt-4">
+                    <div class="col-sm-12  mb-4">
+                        <div class="card pt-4">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+
+                                <h6 class="m-0">Questions List</h6>
+                                {% comment %} <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                        <li class="breadcrumb-item"><a href="#">Question</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Question List</li>
+                                    </ol>
+                                </nav> {% endcomment %}
+                            </div>
+                            <table class="table table-striped ">
+
+                                <thead>
+                                    <tr>
+                                        <th>Que ID</th>
+                                        <th>Ques Text</th>
+                                        <th>Complexity</th>
+                                        <th>Program</th>
+                                        <th>Course</th>
+                                        <th>Added On</th>
+                                        <th>Added By</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for question in questions %}
+                                    <tr>
+                                        <td>{{question.id}}</td>
+                                        <td>{{question.question_text}}</td>
+                                        <td>{{question.complexity}}</td>
+                                        <td>{{question.program}}</td>
+                                        <td>{{question.course}}</td>
+                                        <td>{{question.created_at}}</td>
+                                        <td>{{question.added_by}}</td>
+                                        <td>{{question.status}}</td>
+                                        <div class="modal fade" id="detailModal" aria-labelledby="detailModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title" id="question-title"></h4>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body pb-0">
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <td>
+                                            {% comment %} <a href="{% url 'edit_question' question.id %}"><i class="fa fa-edit"></i></a> {% endcomment %}
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#detailModal" data-question-id="{{ question.id }}" data-url="{% url 'get_detail_modal' question.id %}"><i class="fa fa-eye"></i></a>
+                                        </td>
+
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('a[data-bs-target="#detailModal"]').click(function(event) {
+                event.preventDefault();
+                
+                var url = $(this).data('url');
+                var modalSelector = $(this).data('bs-target');
+                var modal = $(modalSelector);
+                var questionId = $(this).data('question-id');
+                var detailsContainer = modal.find('.modal-body');
+                var header = modal.find('.modal-title');
+                var footer = modal.find('.modal-footer');
+
+                $.ajax({
+                    url: "{% url 'get_detail_modal' 999 %}".replace('999', questionId),
+                    success: function(data) {
+                        header.text(data.question_id + ': ' + data.question_text)
+                        console.log(data);
+                        var footer_html = '';
+                        var html = '<div class="container pb-3 mb-3 text-center border-bottom"><div class="row">';
+                        html += '<div class="col"><strong>Program: </strong>' + data.program_name + '</div>';
+                        html += '<div class="col"><strong>Course: </strong>' + data.course_name + '</div></div>';
+                        html += '<div class="row mt-3"><div class="col"><strong>Complexity: </strong>' + data.complexity + '</div>';
+                        html += '<div class="col"><strong>Status: </strong>' + data.status + '</div></div></div>';
+                        
+                        html += '<div class="container pb-3 text-center border-bottom"><div class="row">';
+                        html += '<div class="col"><strong><h4>Answers</h4></strong></div></div>';
+
+                        for (let x = 0; x < data.answers.length; x++) {
+                            html += '<div class="row">';
+                            if(x+1 == parseInt(data.correct_ans)) {
+                                html += '<div class="col-1">';
+                                html += '<i style = "display:inline-block; color:green;" class="fa-solid fa-circle-check"></i></div>';
+                                html += '<div class="col-10">' + data.answers[x] + '</div></div>';
+                            }
+                            else{
+                                html += '<div class="col-1"></div>';
+                                html += '<div class="col-10">' + data.answers[x] + '</div></div>';
+                            }
+                        }
+                        html += '</div>';
+
+                        html += '<div class="row mt-3"><div class="col text-center"><p mb-0><strong>Solution Text: </strong>' + data.correct_ans_text + '</div>';
+
+                        footer_html += '<div class="container text-center"><div class="row"><div class="col"><strong>Created At: </strong> ' + data.created_at + '</div>';
+                        footer_html += '<div class="col"><strong>Created By: </strong>' + data.added_by + '</div></div></div>';
+                        footer.html(footer_html);
+                        detailsContainer.html(html);
+                    }
+                });
+            });
+        });
+        </script>
+        <script src="https://kit.fontawesome.com/404825dc3b.js" crossorigin="anonymous"></script>
+</body>
+
+{% endblock %}

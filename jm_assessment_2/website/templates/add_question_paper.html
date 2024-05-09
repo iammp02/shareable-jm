@@ -1,0 +1,371 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<body>
+	<div class="wrapper wrapper-dashboard">
+		{% include "header.html" %}
+		{% include "sidebar.html" %}
+		<section class="main">
+			<div class="container-fluid pe-4 ps-4 pb-4">
+				<div class="row pt-4">
+					<div class="col-12">
+						<div class="page-title-box d-flex">
+							<h4 class="page-title">Create New Question Paper</h4>
+						</div>
+					</div>
+				</div>
+
+				<div class="row mt-4">
+					<div class="col-sm-12  mb-4">
+						<div class="card">
+							<div class="d-flex card-header justify-content-between align-items-center">
+								<h4 class="header-title">Create New Question Paper</h4>
+							</div>
+							<nav>
+								<div class="nav nav-tabs" id="nav-tab" role="tablist">
+									<button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
+										data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
+										aria-selected="true">Basic Information</button>
+									<button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab"
+										data-bs-target="#nav-profile" type="button" role="tab"
+										aria-controls="nav-profile" aria-selected="false">Question List</button>
+							    </div>
+							</nav>
+							<div class="tab-content" id="nav-tabContent">
+								<div class="tab-pane fade show active pt-5" id="nav-home" role="tabpanel"
+									aria-labelledby="nav-home-tab">
+									<div class="mb-3 row">
+										<label for="inputPassword" class="col-sm-3 col-form-label text-end">Question Paper Name:</label>
+										<div class="col-sm-9">
+											<input type="text" class="form-control form-control-sm" name="qpaper_name" placeholder="Question Set Name">
+										</div>
+									</div>
+
+									<div class="mb-3 row">
+										<label for="inputPassword" class="col-sm-3 col-form-label text-end">Program Name:</label>
+										<div class="col-sm-9">
+											<select class="form-select form-select-sm" name="program_name" aria-label="Default select example">
+												<option selected>Select</option>
+												{% for program in program_options %}
+												<option value="{{program}}">{{program}}</option>
+												{% endfor %}
+											</select>
+										</div>
+									</div>
+
+									<div class="mb-3 row">
+										<label for="inputPassword" class="col-sm-3 col-form-label text-end">Course Name:</label>
+										<div class="col-sm-9">
+											<select class="form-select form-select-sm" name="course_name" aria-label="Default select example">
+												<option selected>Select</option>
+												{% for course in course_options %}
+												<option value="{{course}}">{{course}}</option>
+												{% endfor %}
+											</select>
+										</div>
+									</div>
+									
+									<div class="mb-3 row">
+										<label for="inputPassword"
+										class="col-sm-3 col-form-label text-end">Semester:</label>
+										<div class="col-sm-9">
+											<select class="form-select form-select-sm" name="semester" aria-label="Default select example">
+												<option selected>Select</option>
+												{% for sem in sems %}
+												<option value="{{sem}}">{{sem}}</option>
+												{% endfor %}
+											</select>
+											{% comment %} <input type="text" class="form-control form-control-sm" name=""
+												placeholder="Semester"> {% endcomment %}
+										</div>
+									</div>
+
+									<div class="mb-3 row">
+										<label for="inputPassword" class="col-sm-3 col-form-label text-end">Institute Name:</label>
+										<div class="col-sm-9">
+											<input type="text" class="form-control form-control-sm" name="institute_name" placeholder="Institute Name">
+										</div>
+									</div>
+
+									<div class="mb-3 row">
+										<label for="inputPassword" class="col-sm-3 col-form-label text-end">Exam Date:</label>
+										<div class="col-sm-9">
+											<input type="date" class="form-control form-control-sm" name="exam_date" placeholder="Exam Date">
+										</div>
+									</div>
+									
+									<div class="mb-3 row">
+										<label for="inputPassword" class="col-sm-3 col-form-label text-end">Exam Duration (In Hours)</label>
+										<div class="col-sm-9">
+											{% comment %} <input type="text" class="form-control form-control-sm" name=""
+												placeholder="Exam Duration (In Hours)"> {% endcomment %}
+												<input type="time" class="form-control" name="exam_duration">
+										</div>
+									</div>
+
+
+
+
+									<div class="mb-3 row">
+										<label for="inputPassword"
+											class="col-sm-3 col-form-label text-end">Status:</label>
+										<div class="col-sm-9">
+											<select class="form-select form-select-sm" name="status"
+												aria-label="Default select example">
+												<option selected>Select</option>
+												<option value="Active">Active</option>
+												<option value="Inactive">Inactive</option>
+											</select>
+										</div>
+									</div>
+									<div class="mb-3 row">
+										<label for="inputPassword" class="col-sm-3 col-form-label text-end">Marks per Question: </label>
+										<div class="col-sm-9">
+											<input type="number" min="1" max="50" id="num_of_fields" placeholder="Marks Per Question" class="form-control form-control-sm" 
+											name="per-q-marks">
+										</div>
+									</div>
+									<div class="mb-3  d-flex justify-content-end">
+										<button type="submit" id="nav-home-tab" class="btn btn-primary mb-3 btn-sm next-tab" disabled>Next</button>
+									</div>
+								</div>
+								<div class="tab-pane fade pt-4" id="nav-profile" role="tabpanel"
+									aria-labelledby="nav-profile-tab">
+									<div id='table-questions' class="mb-3 row">
+										<h6>Questions will be listed here...</h6>
+									</div>
+									<div class="mb-3 row">
+										<label for="inputPassword" class="col-sm-3 col-form-label text-end">Total Marks</label>
+										<div class="col-sm-6">
+											<input type="number" min="1" max="500" id="total_marks" name="total_marks" placeholder="Total Marks" class="form-control form-control-sm" disabled readonly>
+										</div>
+									</div>
+									<div class="mb-3  d-flex justify-content-end">
+										<button type="submit" id="nav-profile-tab" class="btn btn-primary mb-3 btn-sm me-2">Previous</button>
+										<button type="submit" id="submit-qpaper" class="btn btn-primary mb-3 btn-sm">Submit</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+	<script>
+		var formData = {};
+		// function for checking fields status
+		function validateCurrentStep() {
+			var currentTab = $('.nav-link.active').attr('id');
+			var isValid = true;
+	
+			switch (currentTab) {
+				case 'nav-home-tab':
+				var requiredFields = ['qpaper_name', 'program_name', 'course_name', 'semester', 'institute_name', 'exam_date', 'exam_duration', 'status', 'per-q-marks'];
+				isValid = requiredFields.every(function (field) {
+					console.log(isValid);
+					return formData[field] !== undefined && formData[field] !== '' && formData[field] !== 'Select';
+				});
+				break;
+				case 'nav-profile-tab':
+					var requiredFields = ['complexity', 'question_type', 'question_text'];
+					isValid = requiredFields.every(function (field) {
+						return formData[field] !== undefined && formData[field] !== '' && formData[field] !== 'Select';
+					});
+					break;
+				default:
+					isValid = false;
+			}
+	
+			return isValid;
+		}
+	
+		// followup function for disabling the next button if the fields are not filled
+		function updateNextButtonState() {
+			var isValid = validateCurrentStep();
+			$('.next-tab').prop('disabled', !isValid);
+		}
+
+		function getCookie(name) {
+			let cookieValue = null;
+			if (document.cookie && document.cookie !== '') {
+				const cookies = document.cookie.split(';');
+				for (let i = 0; i < cookies.length; i++) {
+					const cookie = cookies[i].trim();
+					if (cookie.substring(0, name.length + 1) === (name + '=')) {
+						cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+						break;
+					}
+				}
+			}
+			return cookieValue;
+		}
+		
+		const csrftoken = getCookie('csrftoken');
+
+		$('body').on('change', 'input[type="number"], input[type="text"], input[type="date"], input[type="time"], select', function () {
+			const fieldType = $(this).prop('nodeName').toLowerCase();
+			const fieldName = $(this).attr('name') || $(this).attr('id');
+			const newValue = $(this).val();
+
+			{% comment %} console.log(`${fieldType} with ${fieldName ? `name/id ${fieldName}` : ''} changed to: ${newValue}`); {% endcomment %}
+			formData[fieldName] = newValue;
+
+			updateNextButtonState();
+			console.log(formData);
+		});
+
+		$('body').on('click', '#nav-home-tab', function() {
+			$('#nav-profile-tab').tab('show');
+			$.ajax({
+				url: '/add_qpaper/',
+				type: 'POST',
+				headers: {
+					'X-CSRFToken': csrftoken
+				},
+				data: JSON.stringify({
+					'program': formData['program_name'],
+					'course': formData['course_name'],
+					'csrfmiddlewaretoken': '{{ csrf_token }}'
+				}),
+				contentType: 'application/json; charset=utf-8',
+				dataType: 'json',
+				success: function(response) {
+					if(response.length != 0){
+						var tableHTML = '<table class="table table-striped"><thead><tr><th>Que ID</th><th>Ques Text</th><th>Complexity</th><th>Program</th><th>Course</th><th>Choose</th></tr></thead>'
+							tableHTML += '<tbody>';
+							for(let i = 0; i < response.length; i++){
+								let record = response[i];
+								tableHTML += '<tr>';
+								for(let key in record){
+									tableHTML += '<td>' + record[key] + '</td>';
+									if(key == 'Course'){
+										tableHTML += '<td><input class="form-check-input" type="checkbox" name="selected-questions" value="' + record['ID'] + '"></td>';
+									}
+								}
+								tableHTML += '</tr>';
+							}
+							tableHTML += '</tbody></table>';
+							$('#table-questions').html(tableHTML);
+						}
+						else{
+							$('#table-questions').html('<h6>No Questions present for the selected Program and Course.</h6>');
+							$('#submit-qpaper').addClass('disabled');
+						}
+						
+						
+				},
+				error: function(xhr, errmsg, err) {
+					// Handle errors that occur during the AJAX request
+				}
+			});
+		});
+		
+		$('body').on('click', '#nav-profile-tab', function() {
+			$('#nav-home-tab').tab('show');
+		});
+
+		$('body').on('click', '#submit-qpaper', function() {
+			const selectedQuestions = $('input[name="selected-questions"]:checked').map(function() {
+				return parseInt($(this).val());
+			}).get();
+			var q_count = Math.floor(parseInt(formData['total_marks']) / parseInt(formData['per-q-marks']));
+			formData['q_count'] = q_count;
+			console.log(q_count);
+			if (selectedQuestions.length === 0) {	
+				alert('Please select at least one question.');
+				return;
+			}
+			else if(selectedQuestions.length > q_count){
+				alert('Total marks and marks for each question implies that you can only have '+ q_count + ' number of questions.' );
+				return;
+			}
+			formData['question_ids'] = selectedQuestions;
+		
+			// Send the selected question IDs to your view
+			$.ajax({
+				url: '/submit_qpaper/', // Replace with your view URL
+				type: 'POST',
+				headers: {
+					'X-CSRFToken': csrftoken
+				},
+				data: JSON.stringify({
+					'program': formData['program_name'],
+					'course': formData['course_name'],
+					'qpaper_name': formData['qpaper_name'],
+					'semester': formData['semester'],
+					'institute_name': formData['institute_name'],
+					'exam_date': formData['exam_date'],
+					'marks_for_each': parseInt(formData['per-q-marks']),
+					'q_count': formData['q_count'],
+					'total_marks': parseInt(formData['total_marks']),
+					'exam_duration': formData['exam_duration'],
+					'status': formData['status'],
+					'question_ids': selectedQuestions,
+					'csrfmiddlewaretoken': '{{ csrf_token }}'
+				}),
+				contentType: 'application/json; charset=utf-8',
+				dataType: 'json',
+				success: function(response) {
+					var alertDiv = $('<div class="alert alert-success alert-dismissible fade in show" role="alert">');
+						alertDiv.text('Question Paper added successfully!');
+						var dismissButton = $('<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>');
+						alertDiv.append(dismissButton);
+						// $('#add-question-form').before(alertDiv);
+						$('#alert-container').html(alertDiv).addClass('show');;
+		
+						// $('#add-question-form')[0].reset();
+						// setTimeout(function () {
+						//     window.location.href = '/dashboard/';
+						// }, 3000);
+						{% comment %} $('#add-question-form')[0].reset(); {% endcomment %}
+						var remainingSeconds = 4; // Example remaining seconds
+						var countdownInterval = setInterval(function () {
+							remainingSeconds--;
+							if (remainingSeconds <= 0) {
+								clearInterval(countdownInterval);
+								window.location.href = '/dashboard/'; // Redirect to the dashboard after countdown completes
+							} else {
+								alertDiv.text('Question Paper added successfully! Redirecting to dashboard in ' + remainingSeconds + ' seconds...');
+							}
+						}, 1000);
+				},
+				error: function(xhr, errmsg, err) {
+					// Handle errors that occur during the AJAX request
+				}
+			});
+		});
+
+		const $parentElement = $('#table-questions');
+
+		function performFunction($checkbox, isChecked) {
+			console.log(`Checkbox with value ${$checkbox.val()} is ${isChecked ? 'checked' : 'unchecked'}`);
+			let per_q_marks = parseInt(formData['per-q-marks']);
+			if(per_q_marks == ''){
+				alert();
+			}
+			let current_marks = parseInt($('#total_marks').val());
+			if(isChecked && $('#total_marks').val() == ''){
+				$('#total_marks').val(per_q_marks);
+			}
+			else if(isChecked){
+				$('#total_marks').val(current_marks + per_q_marks);
+			}
+			else if(!isChecked){
+				$('#total_marks').val(current_marks - per_q_marks);
+			}
+			formData['total_marks'] = $('#total_marks').val()
+		  }
+
+		$parentElement.on('change', 'input[type="checkbox"]', function() {
+			const $checkbox = $(this);
+			const isChecked = $checkbox.is(':checked');
+
+			performFunction($checkbox, isChecked);
+		  });
+
+	</script>
+</body>
+
+{% endblock %}

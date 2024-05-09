@@ -1,0 +1,24 @@
+{% load static %}
+
+
+<div class="modal fade" id="detailModal" data-bs-backdrop="static" aria-labelledby="detailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="question-title">{{ question.question_text }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Complexity:</strong> {{ question.complexity }}</p>
+                <p><strong>Program:</strong> {{ question.program }}</p>
+                <p><strong>Course:</strong> {{ question.course }}</p>
+                <p><strong>Added By:</strong> {{ question.added_by }}</p>
+                <p><strong>Status:</strong> {{ question.status }}</p>
+                <div id="question-details"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>

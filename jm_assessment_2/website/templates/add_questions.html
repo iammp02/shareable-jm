@@ -1,0 +1,192 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<body>
+  <div class="wrapper wrapper-dashboard">
+    {% include "header.html" %}
+    {% include "sidebar.html" %}
+    <section class="main">
+      <div class="container-xl">
+        <div class="row mt-4">
+          <div class="col-sm-12  mb-4">
+            <div class="card">
+              <div class="d-flex card-header justify-content-between align-items-center">
+                <h4 class="header-title">Add New Question</h4>
+              </div>
+              <form id="add-question-form">
+                {% csrf_token %}
+                <nav>
+                  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
+                      type="button" role="tab" aria-controls="nav-home" aria-selected="true" disabled>Basic Info</button>
+                    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile"
+                      type="button" role="tab" aria-controls="nav-profile" aria-selected="false" disabled>Question Info</button>
+                    <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact"
+                      type="button" role="tab" aria-controls="nav-contact" aria-selected="false" disabled>Answer Option</button>
+
+                    <button class="nav-link" id="nav-Solution-tab" data-bs-toggle="tab" data-bs-target="#nav-Solution"
+                      type="button" role="tab" aria-controls="nav-contact" aria-selected="false" disabled>Solution Info</button>
+                  </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                  <div class="tab-pane fade show active pt-5" id="nav-home" role="tabpanel"
+                    aria-labelledby="nav-home-tab">
+
+                    <div class="mb-3 row">
+                      <label for="inputPassword" class="col-sm-3 col-form-label text-end">Program Name:</label>
+                      <div class="col-sm-9">
+                        <select class="form-select form-select-sm" name="program_name"
+                          aria-label="Default select example">
+                          <option disabled selected>Select</option>
+                          {% for program_option in program_options %}
+                          <option value="{{program_option}}">{{program_option}}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                      <label for="inputPassword" class="col-sm-3 col-form-label text-end">Course Name:</label>
+                      <div class="col-sm-9">
+                        <select class="form-select form-select-sm" name="course_name"
+                          aria-label="Default select example">
+                          <option selected>Select</option>
+                          {% for course_option in course_options %}
+                          <option value="{{course_option}}">{{course_option}}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                      <label for="inputPassword" class="col-sm-3 col-form-label text-end">Status:</label>
+                      <div class="col-sm-9">
+                        <select class="form-select form-select-sm" name="status" aria-label="Default select example" required>
+                          <option selected>Select</option>
+                          <option value="Active">Active</option>
+                          <option value="Inactive">Inactive</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                      <button class="btn btn-primary btn-sm me-2 prev-tab" type="button" disabled>Previous</button>
+                      <button class="btn btn-primary btn-sm next-tab" id="next-profile" type="button" disabled>Next</button>
+                    </div>
+
+                  </div>
+
+                  <div class="tab-pane fade pt-4" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                    <div class="mb-3 row">
+                      <label for="inputPassword" class="col-md-2 col-form-label text-end">Complexity:</label>
+                      <div class="col-sm-3">
+                        <select class="form-select form-select-sm" name="complexity"
+                          aria-label="Default select example">
+                          <option selected>Select</option>
+                          <option value="Simple">Simple</option>
+                          <option value="Medium">Medium</option>
+                          <option value="Complex">Complex</option>
+                        </select>
+                      </div>
+                      <label for="inputPassword" class="col-md-2 col-form-label text-end">Question Type:</label>
+                      <div class="col-sm-3">
+                        <select class="form-select form-select-sm" name="question_type"
+                          aria-label="Default select example">
+                          <option selected>Select</option>
+                          <option value="Normal">Normal</option>
+                          <option value="Math">Maths</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                      <label for="inputPassword" class="col-md-2 col-form-label text-end">Specify Question:</label>
+                      <div class="col-sm-9">
+                        <textarea class="form-control" name="question_text" id="exampleFormControlTextarea1"
+                          rows="5"></textarea>
+                      </div>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                      <button class="btn btn-primary btn-sm me-2 prev-tab" id="prev-home" type="button">Previous</button>
+                      <button class="btn btn-primary btn-sm next-tab" id="next-contact" type="button" disabled>Next</button>
+                    </div>
+
+                  </div>
+
+                  <div class="tab-pane pt-5 fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                    <div class="mb-3 row">
+                      <label for="inputPassword" class="col-sm-3 col-form-label text-end">
+                        Answer options would have?</label>
+                      <div class="col-sm-9 pt-2">
+
+                        <div class="mb-3 row">
+                          <div class="col-sm-9">
+                            <select class="form-select form-select-sm" name="answer_type"
+                              aria-label="Default select example">
+                              <option selected>Select</option>
+                              <option value="Normal">Normal</option>
+                              <option value="Math">Math</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                      <label for="inputPassword" class="col-sm-3 col-form-label text-end">
+                        How many answer * options?:</label>
+                      <div class="col-sm-2">
+                        <input type="number" min="2" max="5" id="num_of_fields" class="form-control form-control-sm"
+                          name="no_of_answers">
+                      </div>
+                      <div class="col-sm-2">
+                        <button class="btn btn-sm btn-primary" id="addFieldsBtn" type="button">Done</button>
+                      </div>
+                    </div>
+
+                    <div id="dynamic_fields"></div>
+
+                    <div class="d-flex justify-content-end">
+                      <button class="btn btn-primary btn-sm me-2 prev-tab" id="prev-profile" type="button">Previous</button>
+                      <button class="btn btn-primary btn-sm next-tab" id="next-solution" type="button" disabled>Next</button>
+                    </div>
+
+                  </div>
+
+                  <div class="tab-pane fade pt-5" id="nav-Solution" role="tabpanel" aria-labelledby="nav-solution-tab">
+                    <div class="mb-3 row">
+                      <label for="inputPassword" class="col-sm-3 col-form-label text-end">Answer Text:</label>
+                      <div class="col-sm-9">
+                        <textarea class="form-control" id="answer_text" rows="5"></textarea>
+                      </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                      <label for="inputPassword" class="col-sm-3 col-form-label text-end">Correct Answer Option:</label>
+                      <div class="col-sm-9">
+                        <select class="form-select form-select-sm" name='correct_ans' id="correctAnswerSelect"
+                          aria-label="Default select example">
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="mb-3  d-flex justify-content-end">
+                      <button class="btn btn-primary btn-sm me-2 prev-tab" id="prev-contact" type="button">Previous</button>
+                      <button type="submit" class="btn btn-primary mb-3 btn-sm">Submit</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    var addQuestionsUrl = '{{ add_questions_url }}';
+    var csrfToken = '{{ csrf_token }}';
+  </script>
+  <script src='{% static "js/addq.js" %}'></script>
+</body>
+{% endblock %}

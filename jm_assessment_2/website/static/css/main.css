@@ -1,0 +1,683 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+/* width */
+::-webkit-scrollbar {
+	width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #888;
+	border-radius: 10px;
+}
+
+/* Handle on hover */
+/* ::-webkit-scrollbar-thumb:hover {
+	background: #555;
+} */
+
+
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+body {
+	font-size: 14px;
+	font-family: 'Poppins', sans-serif;
+	color: #2e3438;
+	background: #fafbfe
+		/*#f5f8fd*/
+	;
+	font-weight: 400;
+	letter-spacing: 0.2px;
+	/*	padding-top: 65px;*/
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+header.header-dashboard {
+	background: #FFFFFF;
+	height: 65px;
+	box-shadow: 0px 4px 15px -2px rgba(0, 0, 0, 0.1);
+	display: flex;
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	z-index: 999;
+}
+
+.d-logo {
+	position: relative;
+	width: 220px;
+	display: flex;
+	/*	justify-content: center;
+	align-items: center;
+	transition: all .3s ease-in-out;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	overflow: hidden;*/
+}
+
+.main {
+	display: flex;
+	height: 100vh;
+}
+
+.left-pannel-sidebar {
+	background: #fff;
+	width: 250px;
+	display: flex;
+	padding: 0px 0px 30px 15px;
+	position: fixed;
+	padding-top: 0px;
+	height: calc(100% - 35px);
+	left: 0;
+	top: 65px;
+	transition: all .3s ease-in-out;
+	z-index: 111;
+	box-shadow: 0px 4px 15px -2px rgba(0, 0, 0, 0.1);
+}
+
+.left-sidemenu {
+	list-style-type: none;
+	padding: 0px;
+	margin: 0px;
+	width: 100%;
+}
+
+.left-sidemenu li {
+	display: block;
+	/* white-space: nowrap;*/
+	overflow: hidden;
+	width: 100%;
+}
+
+.left-sidemenu li a {
+	font-size: 14px;
+	line-height: 20px;
+	color: #525252;
+	text-decoration: none;
+	padding: 12px 0px;
+	display: flex;
+	align-items: center;
+}
+
+.left-sidemenu li a span {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	transition: all .3s ease-in-out;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.left-sidemenu li a i {
+	margin-right: 15px;
+	font-size: 18px;
+}
+
+.left-pannel-sidebar ul.left-sidemenu {
+	border: none;
+	height: 100%;
+	width: 100%;
+	position: relative;
+	border-radius: 0;
+	margin: 0;
+	padding-right: 15px;
+	padding-top: 10px;
+	/*
+	overflow-y: auto;
+	background-color: #fff;
+	backface-visibility: hidden;
+*/
+}
+
+.dashnav {
+	display: flex;
+	padding: 0px 30px;
+	/*width: calc(100% - 250px);*/
+	align-items: center;
+	position: relative;
+	transition: all .3s ease-in-out;
+	height: 100%;
+	width: 100%;
+}
+
+.dashnav ul {
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;
+	justify-content: center;
+	align-items: center;
+}
+
+.dashnav ul li {
+	display: inline-block;
+	margin: 0px 15px;
+}
+
+.dashnav ul li a {
+	font-size: 14px;
+	color: #2e3438;
+	display: block;
+	font-weight: 500;
+	text-decoration: none;
+}
+
+.dashnav ul li a img.user {
+	width: 42px;
+	height: 42px;
+	border-radius: 50px;
+	margin-left: 20px;
+}
+
+.dashnav ul li a i {
+	font-size: 18px;
+}
+
+.dashnav ul li a.language {
+	color: #E61B23;
+	text-transform: uppercase;
+}
+
+.dashnav ul li.usr .dropdown-menu {
+	-webkit-box-shadow: 0 0 20px rgba(89, 102, 122, 0.1);
+	box-shadow: 0 0 20px rgba(89, 102, 122, 0.1);
+	-webkit-transform: translateY(30px);
+	transform: translateY(30px);
+	/*
+  opacity: 0;
+  visibility: hidden;
+*/
+	left: -50px !important;
+	border: none;
+	border-radius: 5px;
+	top: 18px !important;
+}
+
+.dashnav ul li.usr .dropdown-menu {
+	left: inherit !important;
+	right: 0px !important;
+	top: 10px !important;
+	padding: 8px 15px;
+	min-width: 225px;
+}
+
+.dashnav ul li.usr .dropdown-menu .dropdown-item {
+	padding: 10px 0px;
+	border-bottom: solid 1px #F3F3F3;
+}
+
+.dashnav ul li.usr .dropdown-menu .dropdown-item i {
+	display: inline-block;
+	margin-right: 12px;
+	vertical-align: middle;
+}
+
+.dropdown-item.pr-logout {
+	color: #FF7777;
+}
+
+.dashnav ul li.usr .dropdown-menu .dropdown-item:hover {
+	background: transparent;
+	color: #1A73E8;
+}
+
+.dashnav ul li.usr .dropdown-menu.show {
+	opacity: 1;
+	-webkit-transform: translateY(0px);
+	transform: translateY(0px);
+	visibility: visible;
+	border-radius: 5px;
+}
+
+.menu-toggle {
+	width: 28px;
+	display: flex;
+	flex-flow: column;
+	height: 25px;
+	justify-content: space-around;
+	position: absolute;
+	left: 210px;
+}
+
+.menu-toggle span {
+	width: 100%;
+	display: inline-block;
+	height: 2px;
+	border-radius: 50px;
+	background: #000;
+	vertical-align: middle;
+}
+
+.menu-toggle span.line2 {}
+
+.main {
+	margin-left: 250px;
+	transition: all .2s ease-in-out;
+}
+
+.menuOpen .main {
+	margin-left: 60px;
+}
+
+.menuOpen .left-pannel-sidebar {
+	width: 60px;
+}
+
+.menuOpen .d-logo {
+	width: 60px;
+}
+
+.d-logo .hd {
+	display: none;
+}
+
+.menuOpen .d-logo .hd {
+	display: block;
+}
+
+.menuOpen .d-logo .ld {
+	display: none;
+}
+
+.d-logo .ld {
+	display: block;
+}
+
+.menuOpen .left-sidemenu li a span {
+	visibility: hidden;
+	opacity: 0;
+}
+
+.right-pannel {
+	padding: 24px;
+	width: 100%;
+}
+
+.menuOpen .menu-toggle span.line2 {
+	opacity: 0;
+	transition: all 0.3s ease 0s;
+}
+
+.menu-toggle span.line2 {
+	transition: all 0.3s ease 0s;
+}
+
+.menu-toggle span.line1 {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	transition: all 0.3s ease 0s;
+}
+
+.menu-toggle span.line3 {
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	transition: all 0.3s ease 0s;
+}
+
+.menuOpen .menu-toggle span.line1 {
+	transform: rotate(45deg);
+	transition: all 0.3s ease 0s;
+	top: 6px;
+}
+
+.menuOpen .menu-toggle span.line3 {
+	transform: rotate(-45deg);
+	transition: all 0.3s ease 0s;
+	bottom: 17px;
+}
+
+.nvlink[data-bs-toggle].collapsed:after {
+	content: "\f105";
+	margin-right: 12px;
+	font-family: 'FontAwesome';
+	transition: all 0.3s ease 0s;
+	font-size: 16px;
+}
+
+.nvlink[data-bs-toggle]:not(.collapsed):after {
+	content: "\f105";
+	font-family: 'FontAwesome';
+	transform: rotate(90deg);
+	margin-right: 12px;
+	transition: all 0.3s ease 0s;
+	font-size: 16px;
+}
+
+#submenu1 li a {
+	padding: 8px 0px
+}
+
+.menuOpen .left-pannel-sidebar:hover {
+	width: 250px;
+}
+
+.menuOpen .left-pannel-sidebar:hover .dashnav {
+	width: 250px;
+}
+
+.menuOpen .left-pannel-sidebar:hover li a span {
+	visibility: visible;
+	opacity: 1;
+}
+
+/* fix main content scrollable behavior due to include header */
+
+.wrapper-dashboard {
+	padding-top: 65px;
+	height: calc(100vh - 65px);
+}
+.main {
+	height: calc(100vh - 65px);
+}
+
+.logotop {
+	width: 250px;
+	display: flex;
+	align-items: center;
+}
+
+.dashnav ul li.usr .dropdown-menu .dropdown-item.pr-logout {
+	border-bottom: none;
+}
+
+.dashnav .icon-search {
+	font-size: 16px;
+}
+
+.dashnav .input-group .btn {
+	display: flex;
+	align-items: center;
+	border-color: #dee2e6;
+}
+
+.page-title-box {
+	justify-content: space-between;
+	align-items: center;
+}
+
+.page-title-box .page-title {
+	font-size: 18px;
+	margin: 0;
+	line-height: 40px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.card {
+	border-radius: 0.25rem;
+	border-color: rgba(0, 0, 0, 0.17);
+	border: none;
+	padding: 0.85rem;
+	box-shadow: 0px 0px 19px 0px rgba(154, 161, 171, 0.12);
+	height: 100%;
+}
+
+.card h5 {
+	font-size: .936rem;
+}
+
+.card h3 {
+	font-size: 1.503rem;
+	color: #6c757d;
+}
+
+.card p {
+	font-size: -0.064rem;
+}
+
+.cbadge {
+	display: inline-block;
+	width: 26px;
+	height: 26px;
+	text-align: center;
+	line-height: 26px;
+	background: #d6e4f3;
+	border-radius: 2px;
+	color: #437ded;
+}
+
+.card .header-title {
+	margin-bottom: .5rem;
+	text-transform: uppercase;
+	letter-spacing: .02em;
+	font-size: .9rem;
+	margin-top: 0;
+}
+
+.card .card-drop {
+	font-size: 20px;
+	color: inherit;
+}
+
+.dropdown-toggle {
+	white-space: nowrap;
+}
+
+.card-header {
+	padding: 12px;
+	background: transparent;
+	border: none;
+}
+
+.dropdown-menu {
+	border-color: #dee2e6;
+	border-radius: 0.25rem;
+	box-shadow: 0px 0px 35px 0px rgba(154, 161, 171, 0.15);
+}
+
+.dropdown-item {
+	font-size: 0.9rem;
+	font-weight: 300;
+	color: #6c757d;
+}
+
+.mh160 {
+	min-height: 160px;
+}
+
+.charcontentBg {
+	background: #f6f7fb;
+}
+
+.card .h2,
+.card h2 {
+	font-size: 1.872rem;
+}
+
+.small,
+small {
+	font-size: .75rem;
+}
+
+.dash-item-overlay {
+	position: absolute;
+	text-align: left;
+	left: 8%;
+	max-width: 350px;
+	padding: 20px;
+	z-index: 1;
+}
+
+.card .h5,
+.card h5 {
+	font-size: .936rem;
+}
+
+#revenue-chart .font-10 {
+	font-size: 10px !important;
+	color: #6c757dbf;
+}
+
+.txt-success {
+	color: #0acf97;
+}
+
+.chart-widget-list p {
+	border-bottom: 1px solid #f6f7fb;
+	margin-bottom: .5rem;
+	padding-bottom: .5rem;
+}
+
+.font-14 {
+	font-size: 14px !important;
+}
+
+.font-13 {
+	font-size: 13px !important;
+}
+
+.table h5 {
+	color: #aaa
+}
+
+.table span {
+	color: #ccc
+}
+
+.dashimg i {
+	font-size: 34px;
+	margin-right: 15px;
+}
+
+.dashimg img {
+	width: 64px;
+	margin-right: 15px;
+}
+
+.dashtoprow .card {
+	min-height: 120px;
+	justify-content: center;
+}
+
+.dashtoprow .card a {
+	text-decoration: none;
+	color: #323232
+}
+
+.bg1 {
+	background: #ffecdf;
+}
+
+.bg2 {
+	background: #D5F6ED;
+}
+
+.bg3 {
+	background: #E2DBF9;
+}
+
+.bg4 {
+	background: #FEFFD7;
+}
+
+.btnrow .btn.btn-default {
+	background: #eb6572;
+	color: #fff;
+	margin: 0px 0px 0px 10px;
+	border-color: #eb6572;
+}
+
+#chekinNext table td,
+#EmailArchive table td {
+	border-color: #fff;
+}
+
+#chekinNext table tr:nth-child(odd),
+#EmailArchive table tr:nth-child(odd) {
+	background: #E2F2F6;
+	border-color: #fff;
+}
+
+#chekinNext table tr:nth-child(even),
+#EmailArchive table tr:nth-child(even) {
+	background: #D2F0FA;
+	border-color: #fff;
+}
+
+th {
+	font-weight: 500;
+}
+
+.LoginSection {
+	width: 100%;
+	height: 100vh;
+	background-size: cover;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	display: flex;
+	align-items: center;
+}
+
+.loginform {
+	background: rgba(255, 255, 255, 0.8);
+	padding: 24px;
+	border-radius: 8px;
+	border: solid 2px #fff;
+	box-shadow: 0px 0px 19px 0px rgba(154, 161, 171, 0.12);
+}
+
+/* MY */
+
+/* Define the animation */
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+/* Apply the animation to the dynamic fields */
+.animated-field {
+	animation: fadeIn 0.5s ease-in-out;
+}
+
+.tab-form {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+.tab-form .tab-content {
+	flex-grow: 1;
+	overflow: auto;
+}
+
+
+.nav-pills {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+/* chart */
+.crow {
+	padding-top: 2%;
+	height: 49%;
+}
+
+.card {
+	user-select: none;
+	cursor: default;
+}
+table {
+	user-select: none;
+	cursor: default;
+}

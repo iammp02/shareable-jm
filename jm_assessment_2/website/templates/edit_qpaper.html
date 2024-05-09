@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<body>
+	<div class="wrapper wrapper-dashboard">
+		{% include "header.html" %}
+		{% include "sidebar.html" %}
+		<section class="main">
+			<div class="container-fluid pe-4 ps-4 pb-4">
+				<div class="row pt-4">
+					<div class="col-12">
+						<div class="page-title-box d-flex">
+							<h4 class="page-title">Edit Question Paper</h4>
+						</div>
+					</div>
+				</div>
+
+				<div class="row mt-4">
+					<div class="col-sm-12  mb-4">
+						<div class="card">
+							<div class="d-flex card-header justify-content-between align-items-center">
+								<h4 class="header-title">Edit Question Paper</h4>
+							</div>
+							<nav>
+								<div class="nav nav-tabs" id="nav-tab" role="tablist">
+									<button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
+										data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
+										aria-selected="true">Basic Information</button>
+									<button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab"
+										data-bs-target="#nav-profile" type="button" role="tab"
+										aria-controls="nav-profile" aria-selected="false">Question List</button>
+							    </div>
+							</nav>
+							<div class="tab-content" id="nav-tabContent">
+								<div class="tab-pane fade show active pt-5" id="nav-home" role="tabpanel"
+									aria-labelledby="nav-home-tab">
+									<div class="mb-3 row">
+										<label for="inputPassword" class="col-sm-3 col-form-label text-end">Question Paper Name:</label>
+										<div class="col-sm-9">
+											<input type="text" value="{{question_paper_name}}" class="form-control form-control-sm" name="qpaper_name" placeholder="Question Set Name">
+										</div>
+									</div>
+
+									<div class="mb-3 row">
+										<label for="inputPassword" class="col-sm-3 col-form-label text-end">Program Name:</label>
+										<div class="col-sm-9">
+											<select class="form-select form-select-sm" id="program_name_select" name="program_name" aria-label="Default select example">
+												<option selected>Select</option>
+												{% for program in program_options %}
+												<option value="{{program}}">{{program}}</option>
+												{% endfor %}
+											</select>
+										</div>
+									</div>
+
+									<div class="mb-3 row">
+										<label for="inputPassword" class="col-sm-3 col-form-label text-end">Course Name:</label>
+										<div class="col-sm-9">
+											<select class="form-select form-select-sm" id="course_name_select" name="course_name" aria-label="Default select example">
+												<option selected>Select</option>
+												{% for course in course_options %}
+												<option value="{{course}}">{{course}}</option>
+												{% endfor %}
+											</select>
+										</div>
+									</div>
+									
+									<div class="mb-3 row">
+										<label for="inputPassword"
+										class="col-sm-3 col-form-label text-end">Semester:</label>
+										<div class="col-sm-9">
+											<select class="form-select form-select-sm" name="semester" aria-label="Default select example">
+												<option selected>Select</option>
+												{% for sem in sems %}
+                                                {% if sem == semester %}
+												<option selected value="{{sem}}">{{sem}}</option>
+                                                {% else %}
+												<option value="{{sem}}">{{sem}}</option>
+                                                {% endif %}
+												{% endfor %}
+											</select>
+											{% comment %} <input type="text" class="form-control form-control-sm" name=""
+												placeholder="Semester"> {% endcomment %}
+										</div>
+									</div>
+
+									<div class="mb-3 row">
+										<label for="inputPassword" class="col-sm-3 col-form-label text-end">Institute Name:</label>
+										<div class="col-sm-9">
+											<input type="text" value="{{institute_name}}" class="form-control form-control-sm" name="institute_name" placeholder="Institute Name">
+										</div>
+									</div>
+
+									<div class="mb-3 row">
+										<label for="inputPassword" class="col-sm-3 col-form-label text-end">Exam Date:</label>
+										<div class="col-sm-9">
+											<input type="date" value="{{exam_date}}" class="form-control form-control-sm" name="exam_date" placeholder="Exam Date">
+										</div>
+									</div>
+									
+									<div class="mb-3 row">
+										<label for="inputPassword" class="col-sm-3 col-form-label text-end">Exam Duration (In Hours)</label>
+										<div class="col-sm-9">
+											{% comment %} <input type="text" class="form-control form-control-sm" name=""
+												placeholder="Exam Duration (In Hours)"> {% endcomment %}
+												<input type="time" value="{{exam_duration}}" class="form-control" name="exam_duration">
+										</div>
+									</div>
+
+
+
+
+									<div class="mb-3 row">
+										<label for="inputPassword"
+											class="col-sm-3 col-form-label text-end">Status:</label>
+										<div class="col-sm-9">
+											<select class="form-select form-select-sm" name="status"
+												aria-label="Default select example">
+                                                {% if status == 'Active' %}
+												<option selected value="Active">Active</option>
+												<option value="Inactive">Inactive</option>
+                                                {% else %}
+												<option value="Active">Active</option>
+												<option selected value="Inactive">Inactive</option>
+                                                {% endif %}
+											</select>
+										</div>
+									</div>
+									<div class="mb-3 row">
+										<label for="inputPassword" class="col-sm-3 col-form-label text-end">Marks per Question: </label>
+										<div class="col-sm-9">
+											<input type="number" value="{{marks_for_each}}" min="1" max="50" id="num_of_fields" placeholder="Marks Per Question" class="form-control form-control-sm" 
+											name="per-q-marks">
+										</div>
+									</div>
+									<div class="mb-3  d-flex justify-content-end">
+										<button type="submit" id="nav-home-tab" class="btn btn-primary mb-3 btn-sm">Next</button>
+									</div>
+								</div>
+								<div class="tab-pane fade pt-4" id="nav-profile" role="tabpanel"
+									aria-labelledby="nav-profile-tab">
+									<div id='table-questions' class="mb-3 row">
+										<h6>Questions will be listed here...</h6>
+									</div>
+									<div class="mb-3 row">
+										<label for="inputPassword" class="col-sm-3 col-form-label text-end">Total Marks</label>
+										<div class="col-sm-6">
+											<input type="number" min="1" max="500" id="total_marks" name="total_marks" placeholder="Total Marks" class="form-control form-control-sm" disabled readonly>
+										</div>
+									</div>
+									<div class="mb-3  d-flex justify-content-end">
+										<button type="submit" id="nav-profile-tab" class="btn btn-primary mb-3 btn-sm me-2">Previous</button>
+										<button type="submit" id="submit-qpaper" class="btn btn-primary mb-3 btn-sm">Submit</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+	<script src=" https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script src="{% static "js/bootstrap.bundle.min.js" %}"></script>
+	<script src="{% static "js/custom.js" %}"></script>
+	
+	<script>
+		var addQpaperUrl = '{{ add_qpaper_url }}';
+		var programName = '{{ program_name }}';
+		var courseName = '{{ course_name }}';
+	</script>
+	<script src="{% static "js/edit_qpaper.js" %}"></script>
+</body>
+
+{% endblock %}
